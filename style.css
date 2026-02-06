@@ -57,6 +57,30 @@
         padding: 24px;
     }
 
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 16px;
+        background: var(--glass-surface);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .cat-mercado {
+        aspect-ratio: 1;
+        background: var(--glass-surface);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
 
 #TituloPrincipal,
 #SubtituloPrincipal {
@@ -181,7 +205,7 @@
 }
 
 .profile-emojis {
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: rgba(99, 102, 241, 1);
     letter-spacing: 10px;
 }
