@@ -61,7 +61,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
-        gap: 16px;
+        gap: 12px;
         background: var(--glass-surface);
         border: 1px solid var(--glass-border);
         border-radius: 16px;
