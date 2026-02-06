@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1 id="TituloPrincipal"><em>Familiy Hub</em></h1> 
+        <p id="SubtituloPrincipal"><em>Gastos y Planificacion Familiar</em></p>
+    </header>
+
+    <!-- Botones de la barra de navegación -->
+    <div class="bottom-nav">
+        <button class="tab-item active" onclick="switchTab('home')">🏠</button>
+        <button class="tab-item" onclick="switchTab('mercado')">🛒 </button>
+        <button class="tab-item" onclick="switchTab('tareas')">📅</button>
+        <button class="tab-item" onclick="switchTab('subs')">🔄</button>
+        <button class="tab-item" onclick="switchTab('wishlist')">🙏</button>
+    </div>
+
+    <!-- Home tab and its content -->
+    <div id="home" class="tab-content" style="display: block">
+        <div class="glass-card">
+                <div class="glass-card-titles">
+                    <h3 style="margin:0">Resumen</h3>
+                    <button onclick="editSettings()" style="background:none; border:none; font-size:1.2em; cursor:pointer;">⚙️</button>
+                </div>
+
+                <div class="progress-label">
+                    <p>Total Gastos</p>
+                    <p id="budgetDisplay">$0 / $4500</p>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill budget-fill" id="budgetProgressBar"></div>
+                </div>
+
+                <div class="progress-label">
+                    <p>Savings Goal</p>
+                    <p id="goalDisplay">$0 saved</p>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill savings-fill" id="savingsProgressBar"></div>
+                </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="glass-card-titles">
+                <h3 style="margin:0">Gastos</h3>
+                <button>Edit</button>
+            </div>
+         </div>
+    </div>
+
+    <!-- Tab de mercado con su contenido -->
+    <div id="mercado" class="tab-content">
+             <div class="glass-card"></div>
+    </div>
+
+    <!-- Tab de tareas con su contenido -->
+    <div id="tareas" class="tab-content">
+        <div class="glass-card"><h2 class="glass-card-titles">Cocina</h2>
+            <div class="in-line">
+                <h3 class="weekdays">Lun.</h3>
+                <div class="profile-emojis">🎤︎︎ 🎤︎︎ 📐</div>
+            </div>
+            <div class="in-line">
+                <h3 class="weekdays">Mar.</h3>
+                <div class="profile-emojis">📐 🎤︎ 👔</div>
+            </div>
+            <div class="in-line">
+                <h3 class="weekdays">Mie.</h3>
+                <div class="profile-emojis">🎤︎︎ 📐 👔</div>
+            </div>
+            <div class="in-line">
+                <h3 class="weekdays">Jue.</h3>
+                <div class="profile-emojis">📐 🎤︎ 👔</div>
+            </div>
+            <div class="in-line">
+                <h3 class="weekdays">Vie.</h3>
+                <div class="profile-emojis">👔 📐 🍽</div>
+            </div>
+            <div class="in-line">
+                <h3 class="weekdays">Sab.</h3>
+                <div class="profile-emojis">🎤︎ 🍽 🍽</div>
+            </div>
+            <div class="in-line">
+                <h3 class="weekdays">Dom.</h3>
+                <div class="profile-emojis">📐 🍽 📐</div>
+            </div>
+        </div>
+        <div class="glass-card">
+            <h2 class="glass-card-titles">Limpieza</h2>
+            <div class="glass-card">
+                <h3 class="glass-card-titles">Sala</h3>
+            </div>
+            <div class="glass-card">
+                <h3 class="glass-card-titles">Cocina</h3>
+            </div>
+            <div class="glass-card">
+                <h3 class="glass-card-titles">Hall Entrada</h3>
+            </div>
+            <div class="glass-card">
+                <h3 class="glass-card-titles">Corredor</h3>
+            </div>
+            <div class="glass-card">
+                <h3 class="glass-card-titles">Baño</h3>
+            </div>
+        </div>
+        <div class="glass-card">
+            <h2 class="glass-card-titles">Teo</h2>
+        </div>
+    </div>
+    
+    <!-- Tab de subs con su contenido -->
+    <div id="subs" class="tab-content">
+        <div class="glass-card">   </div>
+    </div>
+
+    <!-- Tab de wishlist con su contenido -->
+    <div id="wishlist" class="tab-content">
+            <div class="glass-card">   </div> 
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
