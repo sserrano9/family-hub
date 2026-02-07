@@ -1,7 +1,5 @@
 
 
-
-
 function switchTab(tabName) {
     var i, tabContent, tabLinks;
 
@@ -36,3 +34,16 @@ function updateProgressBar(elementId, current, goal) {
 // How you use it:
 updateProgressBar('budgetProgressBar', totalSpent, currentBudget);
 updateProgressBar('savingsProgressBar', currentSavings, savingsGoal);
+
+function addToPantry() {
+        const input = document.getElementById('pantryInput');
+        if(input.value) {
+            data.pantry.push({ id: Date.now(), name: input.value, checked: false });
+            saveData();
+            input.value = '';
+        }
+    }
+    function delPantry(id) {
+        data.pantry = data.pantry.filter(i => i.id !== id);
+        saveData();
+    }

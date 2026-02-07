@@ -1,5 +1,9 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+    * {
+        outline: 2px solid red;
+    }
+
  :root {
         /* Palette: Modern Fintech */
         --bg-mesh-1: #e0c3fc;
@@ -72,15 +76,41 @@
     }
 
     .cat-mercado {
-        aspect-ratio: 1;
-        background: var(--glass-surface);
-        border: 1px solid var(--glass-border);
-        border-radius: 16px;
-        padding: 16px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+        background: white; padding: 20% 15%; border-radius: 20px; 
+        text-align: center; cursor: pointer;
+        border: 1px solid rgba(0,0,0,0.04);
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); 
+        position: relative; transition: all 0.2s ease;
     }
+
+    .cat-titles,
+    .cat-price {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid rgba(0,0,0,0.08);
+        background: rgba(255,255,255,0.6);
+        border-radius: 16px;
+        font-family: inherit;
+        font-size: 16px;
+        color: var(--text-primary);
+        margin-bottom: 12px;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+    }
+
+    .input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
 
 #TituloPrincipal,
 #SubtituloPrincipal {
@@ -214,5 +244,45 @@
     font-size: 20px;
     font-weight: 700;
     color:var(--text-primary);
+}
+
+.add-button {
+    width:50px; 
+    background:var(--accent-primary); 
+    color:white; 
+    border:none; 
+    border-radius:16px; 
+    margin-bottom:12px; 
+    font-size:1.5em; 
+    line-height:1;
+   
+}
+
+.entry-boxes {
+    display: flex;
+    gap: 10px;
+}    
+
+.icon-box {
+    display: flex; 
+        flex-direction: column;
+        justify-items: center;
+    box-sizing: border-box;
+    display: inline-block;
+    container-type: inline-size;
+    font-size:50cqw;
+    width: 100%;
+    max-width: 100px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    align-content: center;
+    margin-bottom: 10px;
+}
+
+.icon {
+    margin:0;
+    font-size: 50cqw;
+    align-content: center;
+    justify-content: center;
 }
 
