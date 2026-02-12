@@ -1,49 +1,47 @@
 
 
+// FUNCTION TO SWITCH BETWEEN TABS //
 function switchTab(tabName) {
-    var i, tabContent, tabLinks;
-
-    tabContent = document.getElementsByClassName("tab-content");
-    for (i = 0; i < tabContent.length; i++) {
-        tabContent[i].style.display = "none";
-    }
+    const tabContent = document.querySelectorAll(".tab-content");
+    tabContent.forEach(tab => tab.style.display = "none");
     
-    tabLinks = document.getElementsByClassName("tab-link");
-    for (i = 0; i < tabLinks.length; i++) {
-        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+    const target = document.getElementById(tabName);
+    if (target) {
+    target.style.display = "block";
     }
-
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
 }
+// END OF FUNCTION TO SWITCH BETWEEN TABS //
 
-function updateProgressBar(elementId, current, goal) {
-    const bar = document.getElementById(elementId);
-    if (!bar) return;
+// FUNCTION TO EDIT COOKING TASKS //
+    const familyEmojis = ["👩", "🎤︎︎", "📐", "👔"];
+    let isEditing = false;
 
-    // Calculate percentage
-    let percentage = (current / goal) * 100;
+    const editCocina = document.getElementById("edit-cocina");
+    const emojiBoxes = document.querySelectorAll(".profile-emojis");
 
-    // Constrain between 0 and 100
-    percentage = Math.max(0, Math.min(percentage, 100));
+        editCocina.addEventListener("click", () => {
+            isEditing = !isEditing;
 
-    // Update the width - the CSS 'transition' handles the animation!
-    bar.style.width = percentage + "%";
-}
+            if (isEditing) {
+                editCocina.textContent = "Guardar";
+                document.body.classList.add("editing");
+            }else{
+                editCocina.textContent = "⚙️";
+                document.body.classList.remove("editing");
+                saveData();
+            }
+        });
 
-// How you use it:
-updateProgressBar('budgetProgressBar', totalSpent, currentBudget);
-updateProgressBar('savingsProgressBar', currentSavings, savingsGoal);
+        emojiBoxes.forEach(box => {
+            box.addEventListener("click", () => {
+                if (!isEditing) return;
 
-function addToPantry() {
-        const input = document.getElementById('pantryInput');
-        if(input.value) {
-            data.pantry.push({ id: Date.now(), name: input.value, checked: false });
-            saveData();
-            input.value = '';
-        }
-    }
-    function delPantry(id) {
-        data.pantry = data.pantry.filter(i => i.id !== id);
-        saveData();
-    }
+                const currentEmoji = box.textContent;
+                let index = familyEmojis.indexOf(currentEmoji);
+
+                index = (index + 1) % familyEmojis.length;
+
+                box.textContent = familyEmojis[index];
+            });
+        });
+// END OF FUNCTION TO EDIT COOKING TASKS //

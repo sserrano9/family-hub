@@ -14,21 +14,21 @@
         <p id="SubtituloPrincipal"><em>Gastos y Planificacion Familiar</em></p>
     </header>
 
-    <!-- Botones de la barra de navegación -->
+    <!-- NAVIGATION BAR -->
     <div class="bottom-nav">
-        <button class="tab-item active" onclick="switchTab('home')">🏠</button>
+        <button class="tab-item" onclick="switchTab('home')">🏠</button>
         <button class="tab-item" onclick="switchTab('mercado')">🛒 </button>
         <button class="tab-item" onclick="switchTab('tareas')">📅</button>
-        <button class="tab-item" onclick="switchTab('subs')">🔄</button>
+        <button class="tab-item" onclick="switchTab('ideas')">💡</button>
         <button class="tab-item" onclick="switchTab('wishlist')">🙏</button>
     </div>
 
-    <!-- Home tab and its content -->
+    <!-- HOME TAB AND CONTENT -->
     <div id="home" class="tab-content" style="display: block">
         <div class="glass-card">
                 <div class="glass-card-titles">
                     <h3 style="margin:0">Resumen</h3>
-                    <button onclick="editSettings()" style="background:none; border:none; font-size:1.2em; cursor:pointer;">⚙️</button>
+                    <button onclick="editSettings()" class="edit-buttons">⚙️</button>
                 </div>
 
                 <div class="progress-label">
@@ -56,7 +56,7 @@
          </div>
     </div>
 
-    <!-- Tab de mercado con su contenido -->
+    <!-- GROCERIES TAB AND CONTENT -->
     <div id="mercado" class="tab-content">
         <div class="glass-card">
             <div class="list-section">
@@ -116,36 +116,69 @@
         </div>
     </div>
 
-    <!-- Tab de tareas con su contenido -->
+    <!-- TASKS TAB AND CONTENT -->
     <div id="tareas" class="tab-content">
-        <div class="glass-card"><h2 class="glass-card-titles">Cocina</h2>
-            <div class="in-line">
+        <div class="glass-card">
+            <div class="glass-card-titles">
+                <h2 class="glass-card-titles">Cocina</h2>
+                <button id="edit-cocina" class="edit-buttons">⚙️</button>
+            </div>
+
+            <div class="flex-container">
                 <h3 class="weekdays">Lun.</h3>
-                <div class="profile-emojis">🎤︎︎ 🎤︎︎ 📐</div>
+                <div class="profile-emoji-box">
+                    <div class="profile-emojis">🎤︎︎</div>
+                    <div class="profile-emojis">🎤︎︎</div>
+                    <div class="profile-emojis">︎📐</div>
+                </div>
             </div>
-            <div class="in-line">
+            <div class="flex-container">
                 <h3 class="weekdays">Mar.</h3>
-                <div class="profile-emojis">📐 🎤︎ 👔</div>
+                <div class="profile-emoji-box">
+                    <div class="profile-emojis">📐</div>
+                    <div class="profile-emojis">🎤︎</div>
+                    <div class="profile-emojis">👔</div>
+                </div>
             </div>
-            <div class="in-line">
+            <div class="flex-container">
                 <h3 class="weekdays">Mie.</h3>
-                <div class="profile-emojis">🎤︎︎ 📐 👔</div>
+                <div class="profile-emoji-box">
+                    <div class="profile-emojis">🎤︎︎</div>
+                    <div class="profile-emojis">📐</div>
+                    <div class="profile-emojis">👔</div>
+                </div>
             </div>
-            <div class="in-line">
+            <div class="flex-container">
                 <h3 class="weekdays">Jue.</h3>
-                <div class="profile-emojis">📐 🎤︎ 👔</div>
+                <div class="profile-emoji-box">
+                    <div class="profile-emojis">📐</div>
+                    <div class="profile-emojis">👔</div>
+                    <div class="profile-emojis">🎤︎︎</div>
+                </div>
             </div>
-            <div class="in-line">
+            <div class="flex-container">
                 <h3 class="weekdays">Vie.</h3>
-                <div class="profile-emojis">👔 📐 🍽</div>
+                <div class="profile-emoji-box">
+                    <div class="profile-emojis">👔</div>
+                    <div class="profile-emojis">📐</div>
+                    <div class="profile-emojis">👔</div>
+                </div>
             </div>
-            <div class="in-line">
+            <div class="flex-container">
                 <h3 class="weekdays">Sab.</h3>
-                <div class="profile-emojis">🎤︎ 🍽 🍽</div>
+                <div class="profile-emoji-box">
+                    <div class="profile-emojis">🎤︎</div>
+                    <div class="profile-emojis">🎤︎︎</div>
+                    <div class="profile-emojis">🎤︎︎</div>
+                </div>
             </div>
-            <div class="in-line">
+            <div class="flex-container">
                 <h3 class="weekdays">Dom.</h3>
-                <div class="profile-emojis">📐 🍽 📐</div>
+                <div class="profile-emoji-box">
+                    <div class="profile-emojis">📐</div>
+                    <div class="profile-emojis">🎤︎︎</div>
+                    <div class="profile-emojis">👔</div>
+                </div>
             </div>
         </div>
         <div class="glass-card">
@@ -171,12 +204,12 @@
         </div>
     </div>
     
-    <!-- Tab de subs con su contenido -->
-    <div id="subs" class="tab-content">
+    <!-- IDEAS TAB AND CONTENT -->
+    <div id="ideas" class="tab-content">
         <div class="glass-card">   </div>
     </div>
 
-    <!-- Tab de wishlist con su contenido -->
+    <!-- WISHLIST TAB AND CONTENT -->
     <div id="wishlist" class="tab-content">
             <div class="glass-card">
                 <h2 class="glass-card-titles">Restaurantes</h2>
