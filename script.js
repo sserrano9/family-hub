@@ -3,9 +3,22 @@
 const SUPABASE_URL = 'https://ynlrzypirbdswfngnwvt.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlubHJ6eXBpcmJkc3dmbmdud3Z0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5MjM0NzgsImV4cCI6MjA4NjQ5OTQ3OH0.QjZieMxaHbz1sIH-VeoQbz-v8AuZmcusRVQ2G1HC9h0';
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-// --- LOAD DATA ---
+
+const familyEmojis = ["👩", "🎤︎︎", "📐", "👔"];
+    let isEditing = false;
+
+const editCocina = document.getElementById("edit-cocina");
+const emojiBoxes = document.querySelectorAll(".profile-emojis");
+
+function updateSlotInHTML(dayName, slotName, emojiValue) {
+    const selector = `.profile-emojis[data-day="${dayName}"][data-slot="${slotName}"]`;
+    const element = document.querySelector(selector);
+    if (element) {
+        element.textContent = emojiValue;
+    }
+}
+
 async function loadSchedule() {
-    // Get all rows, ordered by ID (so Monday stays first)
     const { data, error } = await db
         .from('Cocina')
         .select('*')
@@ -15,29 +28,21 @@ async function loadSchedule() {
         console.error("Error loading:", error);
         return;
     }
-    // Now, loop through the data and update your HTML
     data.forEach(row => {
-        // This assumes your HTML rows have IDs like "row-1", "row-2"
-        // OR you can use the loop index if your HTML order matches the DB order perfectly.
-        
-        // Example: Update the slots for this specific day
         updateSlotInHTML(row.day, 'slot1', row.slot1);
         updateSlotInHTML(row.day, 'slot2', row.slot2);
         updateSlotInHTML(row.day, 'slot3', row.slot3);
     });
 }
-// --- SAVE DATA --- //
-async function updateEmoji(dayName, slotName, newEmoji) {
+
+async function saveEmojiToDB(dayName, slotName, newEmoji) {
     const { error } = await db
         .from('Cocina')
-        .update({ [slotName]: newEmoji }) // e.g. { slot1: "⚽" }
-        .eq('day', dayName); // Update the row where day is "Lunes"
+        .update({ [slotName]: newEmoji })
+        .eq('day', dayName);
 
     if (error) console.error("Error saving:", error);
 }
-loadSchedule();
-// END OF DATABASE CONFIGURATION //
-
 // FUNCTION TO SWITCH BETWEEN TABS //
 function switchTab(tabName) {
     const tabContent = document.querySelectorAll(".tab-content");
@@ -51,12 +56,6 @@ function switchTab(tabName) {
 // END OF FUNCTION TO SWITCH BETWEEN TABS //
 
 // FUNCTION TO EDIT COOKING TASKS //
-    const familyEmojis = ["👩", "🎤︎︎", "📐", "👔"];
-    let isEditing = false;
-
-    const editCocina = document.getElementById("edit-cocina");
-    const emojiBoxes = document.querySelectorAll(".profile-emojis");
-
         editCocina.addEventListener("click", () => {
             isEditing = !isEditing;
 
@@ -70,15 +69,21 @@ function switchTab(tabName) {
         });
 
         emojiBoxes.forEach(box => {
-            box.addEventListener("click", () => {
+            box.addEventListener("click", async() => {
                 if (!isEditing) return;
 
-                const currentEmoji = box.textContent;
+                const currentEmoji = box.textContent.trim();
                 let index = familyEmojis.indexOf(currentEmoji);
-
                 index = (index + 1) % familyEmojis.length;
+                const nextEmoji = familyEmojis[index];
 
-                box.textContent = familyEmojis[index];
+                box.textContent = nextEmoji;
+
+                const day = box.getAttribute('data-day');
+                const slot = box.getAttribute('data-slot');
+
+                await saveEmojiToDB(day, slot, nextEmoji);
             });
         });
 // END OF FUNCTION TO EDIT COOKING TASKS //
+loadSchedule();
