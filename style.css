@@ -1,10 +1,10 @@
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-    * {
-        outline: 0px solid red;
-    }
+* {
+outline: 0px solid red;
+}
 
- :root {
+:root {
         /* Palette: Modern Fintech */
         --bg-mesh-1: #e0c3fc;
         --bg-mesh-2: #8ec5fc;
@@ -28,9 +28,9 @@
         --stack-util: #60a5fa;
         --stack-gym: #fbbf24;
         --stack-other: #94a3b8;
-    }
+}
 
-    body {
+body {
         font-family: 'Inter', sans-serif;
         background: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
                     radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
@@ -47,23 +47,21 @@
         padding-bottom: 110px; /* Space for nav */
         color: var(--text-primary);
         -webkit-font-smoothing: antialiased;
-    }
+}
 
-
-
-    @keyframes meshMove {
+@keyframes meshMove {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
-    }
+}
 
-    .container {
-        max-width: 480px;
-        margin: 0 auto;
-        padding: 24px;
-    }
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px;
+}
 
-    .grid {
+.grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
@@ -75,9 +73,9 @@
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-    }
+}
 
-    .cat-mercado {
+.cat-mercado {
         display: flex; 
         flex-direction: column;
         align-items: center;
@@ -86,15 +84,15 @@
         border: 1px solid rgba(0,0,0,0.04);
         box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); 
         position: relative; transition: all 0.2s ease;
-    }
+}
 
-    .cat-titles,
-    .cat-price {
+.cat-titles,
+.cat-price {
         margin: 0;
         margin-bottom: 10px;
-    }
+}
 
-    input, select {
+input, select {
         width: 100%;
         padding: 14px 16px;
         border: 1px solid rgba(0,0,0,0.08);
@@ -106,9 +104,9 @@
         margin-bottom: 12px;
         box-sizing: border-box;
         transition: all 0.2s ease;
-    }
+}
 
-    .input-group {
+.input-group {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
@@ -332,7 +330,6 @@
     justify-content: center;
 }
 
-/* EDIT BUTTONS AND EDIT MODE STYLING */
 body.editing .profile-emojis {
     color: var(--stack-stream);
     cursor: pointer;
@@ -342,4 +339,29 @@ body.editing .profile-emojis {
     0% { transform: scale(1); }
     50% { transform: scale(1.15); }
     100% { transform: scale(1); }
+}
+
+/* The Grid of 4 Days */
+.cleaning-slots {
+    display: flex;
+    justify-content: space-between; /* Spreads them out evenly */
+    margin-top: 10px;
+}
+
+/* The Individual Buttons */
+.clean-slot {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eee;
+    border-radius: 50%; /* Circle shape */
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.clean-slot:hover {
+    background: #ddd;
 }
