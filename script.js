@@ -96,7 +96,7 @@ editLimpieza.addEventListener("click", () => {
     if (isEditingLimpieza) {
         editLimpieza.textContent = "Guardar";
         cleaningGrid.classList.add("editing");
-
+    }else{
         editLimpieza.textContent = "⚙️";
         cleaningGrid.classList.remove("editing");
     }
@@ -108,7 +108,10 @@ async function loadCleaningSchedule() {
         .select('*')
         .order('id');
 
-    if (error) return console.error(error);
+    if (error) {
+        console.error("Error loading schedule:", error);
+        return;
+    }
     cleaningGrid.innerHTML = '';
 
     data.forEach(row => {
