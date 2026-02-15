@@ -286,3 +286,6 @@ async function loadRecetas() {
         container.innerHTML += recetasHTML;
     });
 }
+
+loadRestaurants();
+loadRecetas();
