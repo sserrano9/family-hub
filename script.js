@@ -9,6 +9,7 @@ const familyEmojis = ["👩👔", "🎤︎︎", "📐", "🍴"];
 
 const editCocina = document.getElementById("edit-cocina");
 const emojiBoxes = document.querySelectorAll(".profile-emojis");
+
 const editLimpieza = document.getElementById("edit-limpieza");
 const cleaningGrid = document.getElementById("cleaning-grid");
 
@@ -165,3 +166,123 @@ cleaningGrid.addEventListener('click', async (event) => {
     if (error) console.error("Save failed:", error);
 });
 loadCleaningSchedule();
+
+// RESTAURANTS SECTION //
+document.getElementById('rest-add-btn').addEventListener('click', async () => {
+    const nameValue = document.getElementById('rest-name-input').value;
+    const linkValue = document.getElementById('rest-link-input').value;
+    const zoneValue = document.getElementById('rest-zone-input').value;
+    const priceValue = document.getElementById('rest-price').value;
+    const foodValue = document.getElementById('rest-type').value;
+
+    if (!nameValue) return alert("Please enter a name!");
+
+    const { error } = await db
+        .from('Restaurants')
+        .insert([
+            {
+                // Column Name : Variable Name
+                name: nameValue,
+                link: linkValue,
+                zone: zoneValue,
+                price: priceValue,
+                food_type: foodValue,
+            }
+        ]);
+        if (error) {
+        console.error("Error saving:", error);
+        alert("Could not save restaurant.");
+        }else{
+            console.log("Restaurant saved!");
+            document.getElementById('rest-name-input').value = '';
+            document.getElementById('rest-link-input').value = '';
+            document.getElementById('rest-zone-input').value = '';
+            document.getElementById('rest-price').value = '';
+            document.getElementById('rest-type').value = '';
+            loadRestaurants();
+        }
+    });
+
+async function loadRestaurants() {
+    const { data, error } = await db
+        .from('Restaurants')
+        .select('*')
+        .order('id');
+
+    if (error) {
+        console.error("Error loading schedule:", error);
+        return;
+    }
+
+    const container = document.getElementById('restaurants-list');
+    container.innerHTML = '';
+
+    data.forEach(row => {
+        const restHTML = `
+        <div class="glass-card">
+                <h3 class="glass-card-titles">${row.name}</h3>
+                <p>📍 ${row.zone}</p>
+                <p>$ ${row.price}</p> 
+                <p>Tipo: ${row.food_type}</p>
+                <a href="${row.link}" target="_blank">Ver Mapa/Link</a>
+            </div>
+        `;
+        container.innerHTML += restHTML;
+    });
+}
+
+// RECIPES SECTION //
+document.getElementById('recipe-add-btn').addEventListener('click', async () => {
+    const RecNameValue = document.getElementById('recipe-name-input').value;
+    const RecLinkValue = document.getElementById('recipe-link-input').value;
+    const RecTypeValue = document.getElementById('recipe-type-input').value;
+
+    if (!RecNameValue) return alert("Please enter a name!");
+
+    const { error } = await db
+        .from('Recetas')
+        .insert([
+            {
+                // Column Name : Variable Name
+                name: RecNameValue,
+                link: RecLinkValue,
+                rec_type: RecTypeValue,
+            }
+        ]);
+        if (error) {
+        console.error("Error saving:", error);
+        alert("Could not save restaurant.");
+        }else{
+            console.log("Recipe saved!");
+            document.getElementById('recipe-name-input').value = '';
+            document.getElementById('recipe-link-input').value = '';
+            document.getElementById('recipe-type-input').value = '';
+            loadRecetas();
+        }
+    });
+
+async function loadRecetas() {
+    const { data, error } = await db
+        .from('Recetas')
+        .select('*')
+        .order('id');
+
+    if (error) {
+        console.error("Error loading:", error);
+        return;
+    }
+
+    const container = document.getElementById('recipes-list');
+    container.innerHTML = '';
+
+    data.forEach(row => {
+        const recetasHTML = `
+        <div class="glass-card">
+                <h3 class="glass-card-titles">${row.name}</h3>
+                <p>Tipo: ${row.rec_type}</p>
+                <a href="${row.link}" target="_blank">Ver Mapa/Link</a>
+            </div>
+        `;
+        container.innerHTML += recetasHTML;
+    });
+}

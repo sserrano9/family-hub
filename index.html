@@ -197,23 +197,64 @@
     
     <!-- IDEAS TAB AND CONTENT -->
     <div id="ideas" class="tab-content">
-        <div class="glass-card">   </div>
+        <div class="glass-card">
+                <div class="glass-card-titles">
+                    <h2 class="glass-card-titles-text">Restaurantes</h2>
+                    <button id="rest-add-btn" class="add-button">+</button>
+                </div>
+                <div class="list-section">
+                <div>
+                    <input type="text" id="rest-name-input" placeholder="Nombre: e.g. Cora, Myka...">
+                    <input type="text" id="rest-link-input" placeholder="Link Instagram, Google Maps">
+                    <div class="flex-container">
+                        <select name="food-type" id="rest-type">
+                            <option value="">--Tipo--</option>
+                            <option value="Sushi">Sushi</option>
+                            <option value="Mexican">Mexican</option>
+                            <option value="Coffee">Coffee</option>
+                        </select>
+                        <select name="price" id="rest-price">
+                            <option value="">--Precio--</option>
+                            <option value="1-10">$1-10</option>
+                            <option value="10-18">$10-18</option>
+                            <option value="18-30">$18-30</option>
+                        </select>
+                        <input type="text" id="rest-zone-input" placeholder="Zona">
+                    </div>
+                </div>
+                </div> 
+        </div>
+        <div id="restaurants-list"> 
+        </div>
+
+         <div class="glass-card">
+                <div class="glass-card-titles">
+                    <h2 class="glass-card-titles-text">Recetas</h2>
+                    <button id="recipe-add-btn" class="add-button">+</button>
+                </div>
+                <div class="list-section">
+                <div>
+                    <input type="text" id="recipe-name-input" placeholder="Nombre: Brownie, Pad Thai...">
+                    <input type="text" id="recipe-link-input" placeholder="Link Instagram, TikTok">
+                    <div class="flex-container">
+                        <select name="recipe-type" id="recipe-type-input">
+                            <option value="">--Tipo--</option>
+                            <option value="proteina">Proteina</option>
+                            <option value="side">Side</option>
+                            <option value="salsa">Salsa</option>
+                            <option value="postre">Postre</option>
+                        </select>
+                    </div>
+                </div>
+                </div> 
+        </div>
+        <div id="recipes-list"> 
     </div>
 
     <!-- WISHLIST TAB AND CONTENT -->
     <div id="wishlist" class="tab-content">
-            <div class="glass-card">
-                <h2 class="glass-card-titles">Restaurantes</h2>
-                <div class="list-section">
-                <div class="input-group glass">
-                    <input type="text" id="pantry-input" placeholder="e.g. Cora, Myka...">
-                    <button id="pantry-add-btn" class="add-button">+</button>
-                </div>
-                <ul id="pantry-list" class="styled-list">
-                </ul>
-            </div>
-            </div> 
     </div>
+
 
 </div>
 
