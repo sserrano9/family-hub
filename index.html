@@ -126,7 +126,7 @@
             </div>
 
             <div class="flex-container">
-                <h3 class="weekdays">Lun.</h3>
+                <h3 class="weekdays">L</h3>
                 <div class="profile-emoji-box">
                     <div class="profile-emojis" data-day="Lun" data-slot="slot1">🎤︎︎</div>
                     <div class="profile-emojis" data-day="Lun" data-slot="slot2">🎤︎︎</div>
@@ -134,7 +134,7 @@
                 </div>
             </div>
             <div class="flex-container">
-                <h3 class="weekdays">Mar.</h3>
+                <h3 class="weekdays">M</h3>
                 <div class="profile-emoji-box">
                     <div class="profile-emojis" data-day="Mar" data-slot="slot1">📐</div>
                     <div class="profile-emojis" data-day="Mar" data-slot="slot2">🎤︎</div>
@@ -142,7 +142,7 @@
                 </div>
             </div>
             <div class="flex-container">
-                <h3 class="weekdays">Mie.</h3>
+                <h3 class="weekdays">M</h3>
                 <div class="profile-emoji-box">
                     <div class="profile-emojis" data-day="Mie" data-slot="slot1">🎤︎︎</div>
                     <div class="profile-emojis" data-day="Mie" data-slot="slot2">📐</div>
@@ -150,7 +150,7 @@
                 </div>
             </div>
             <div class="flex-container">
-                <h3 class="weekdays">Jue.</h3>
+                <h3 class="weekdays">J</h3>
                 <div class="profile-emoji-box">
                     <div class="profile-emojis" data-day="Jue" data-slot="slot1">📐</div>
                     <div class="profile-emojis" data-day="Jue" data-slot="slot2">👔</div>
@@ -158,7 +158,7 @@
                 </div>
             </div>
             <div class="flex-container">
-                <h3 class="weekdays">Vie.</h3>
+                <h3 class="weekdays">V</h3>
                 <div class="profile-emoji-box">
                     <div class="profile-emojis" data-day="Vie" data-slot="slot1">👔</div>
                     <div class="profile-emojis" data-day="Vie" data-slot="slot2">📐</div>
@@ -166,7 +166,7 @@
                 </div>
             </div>
             <div class="flex-container">
-                <h3 class="weekdays">Sab.</h3>
+                <h3 class="weekdays">S</h3>
                 <div class="profile-emoji-box">
                     <div class="profile-emojis" data-day="Sab" data-slot="slot1">🎤︎</div>
                     <div class="profile-emojis" data-day="Sab" data-slot="slot2">🎤︎︎</div>
@@ -174,7 +174,7 @@
                 </div>
             </div>
             <div class="flex-container">
-                <h3 class="weekdays">Dom.</h3>
+                <h3 class="weekdays">D</h3>
                 <div class="profile-emoji-box">
                     <div class="profile-emojis" data-day="Dom" data-slot="slot1">📐</div>
                     <div class="profile-emojis" data-day="Dom" data-slot="slot2">🎤︎︎</div>
@@ -182,6 +182,7 @@
                 </div>
             </div>
         </div>
+        <!-- Cleaning Section -->
         <section class="glass-card">
             <div class="glass-card-titles">
                 <h2 class="glass-card-titles">Limpieza</h2>
@@ -197,18 +198,17 @@
     
     <!-- IDEAS TAB AND CONTENT -->
     <div id="ideas" class="tab-content">
-        <div class="glass-card">
+        <div class="glass-card-infill">
                 <div class="glass-card-titles">
                     <h2 class="glass-card-titles-text">Restaurantes</h2>
                     <button id="rest-add-btn" class="add-button">+</button>
                 </div>
-                <div class="list-section">
-                <div>
+                <div class="flex-container">
                     <input type="text" id="rest-name-input" placeholder="Nombre: e.g. Cora, Myka...">
                     <input type="text" id="rest-link-input" placeholder="Link Instagram, Google Maps">
                     <div class="flex-container">
-                        <select name="food-type" id="rest-type">
-                            <option value="">--Tipo--</option>
+                        <select class="dropdowns" name="food-type" id="rest-type">
+                            <option value="">Tipo</option>
                             <option value="Cafe">Cafe</option>
                             <option value="Mexican">Mexicano</option>
                             <option value="Asian">Asiatico</option>
@@ -219,32 +219,30 @@
                             <option value="Otro">Otro</option>
                             
                         </select>
-                        <select name="price" id="rest-price">
-                            <option value="">--Precio--</option>
+                        <select class="dropdowns" name="price" id="rest-price">
+                            <option value="">Precio</option>
                             <option value="1-10">$1-10</option>
                             <option value="10-18">$10-18</option>
                             <option value="18-30">$18-30</option>
                         </select>
-                        <input type="text" id="rest-zone-input" placeholder="Zona">
+                        <input class="dropdowns" type="text" id="rest-zone-input" placeholder="Zona">
                     </div>
-                </div>
                 </div> 
         </div>
         <div id="restaurants-list"> 
         </div>
 
-         <div class="glass-card">
+        <div class="glass-card">
                 <div class="glass-card-titles">
                     <h2 class="glass-card-titles-text">Recetas</h2>
                     <button id="recipe-add-btn" class="add-button">+</button>
                 </div>
-                <div class="list-section">
-                <div>
+                <div class="flex-container">
                     <input type="text" id="recipe-name-input" placeholder="Nombre: Brownie, Pad Thai...">
                     <input type="text" id="recipe-link-input" placeholder="Link Instagram, TikTok">
                     <div class="flex-container">
-                        <select name="recipe-type" id="recipe-type-input">
-                            <option value="">--Tipo--</option>
+                        <select class="dropdowns" name="recipe-type" id="recipe-type-input">
+                            <option value="">Tipo</option>
                             <option value="proteina">Proteina</option>
                             <option value="side">Side</option>
                             <option value="salsa">Salsa</option>
@@ -252,14 +250,54 @@
                             <option value="ensalada">Ensalada</option>
                         </select>
                     </div>
-                </div>
                 </div> 
         </div>
         <div id="recipes-list"> 
     </div>
+    </div>
 
     <!-- WISHLIST TAB AND CONTENT -->
     <div id="wishlist" class="tab-content">
+        <div class="flex-container">
+            <button id="filter-mami" class="filter-buttons">Mami</button>
+            <button id="filter-pami" class="filter-buttons">Papi</button>
+            <button id="filter-gaby" class="filter-buttons">Gaby</button>
+            <button id="filter-tato" class="filter-buttons">Tato</button>
+            <button id="filter-teo" class="filter-buttons">Teo</button>
+        </div>
+        <div class="glass-card-infill">
+                <div class="glass-card-titles">
+                    <h2 class="glass-card-titles-text">✨Wishlist✨</h2>
+                    <button id="wish-add-btn" class="add-button">+</button>
+                </div>
+                <div class="flex-container">
+                    <input type="text" id="wish-item-input" placeholder="Nombre: Libro, taza">
+                    <input type="text" id="wish-link-input" placeholder="Link">
+                    <input type="text" id="wish-price" placeholder="Precio">
+                    <div class="flex-container">
+                        <select class="dropdowns" name="urgency" id="wish-urgency">
+                            <option value="">Urgencia</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            
+                        </select>
+                        <select class="dropdowns" name="person" id="wish-person">
+                            <option value="">Familia</option>
+                            <option value="Mami">Mami</option>
+                            <option value="Papi">Papi</option>
+                            <option value="Gaby">Gaby</option>
+                            <option value="Tato">Tato</option>
+                            <option value="Teo">Teo</option>
+                        </select>
+                        <div class="input-box" id="wish-status">✨</div>
+                    </div>
+                </div> 
+        </div>
+        <div id="wish-list"> 
+        </div>
     </div>
 
 

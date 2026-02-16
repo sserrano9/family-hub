@@ -4,6 +4,7 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const familyEmojis = ["👩👔", "🎤︎︎", "📐", "🍴"];
+const cleaningEmojis = ["👩", "👔", "🎤︎︎", "📐"];
     let isEditing = false;
     let isEditingLimpieza = false;
 
@@ -119,23 +120,23 @@ async function loadCleaningSchedule() {
         console.log("Row Data:", row);
         const roomTitle = row.Room || row.name || "Unnamed Room";
         const rowHTML = `
-            <div class="glass-card">
+            <div class="glass-card-infill">
                 <h3 class="glass-card-titles">${roomTitle}</h3>
                 <div class="cleaning-slots">
                 <div class="flex-container-vertical">
-                    <span class="glass-card-titles">Lun</span>
+                    <span class="glass-card-titles">L</span>
                     <div class="clean-slot" data-id="${row.id}" data-col="mon">${row.mon || "⚪"}</div>
                 </div>
                 <div class="flex-container-vertical">
-                    <span class="glass-card-titles">Mie</span>
+                    <span class="glass-card-titles">M</span>
                     <div class="clean-slot" data-id="${row.id}" data-col="wed">${row.wed || "⚪"}</div>
                 </div>
                 <div class="flex-container-vertical">
-                    <span class="glass-card-titles">Vie</span>
+                    <span class="glass-card-titles">V</span>
                     <div class="clean-slot" data-id="${row.id}" data-col="fri">${row.fri || "⚪"}</div>
                 </div>
                 <div class="flex-container-vertical">
-                    <span class="glass-card-titles">Dom</span>
+                    <span class="glass-card-titles">D</span>
                     <div class="clean-slot" data-id="${row.id}" data-col="sun">${row.sun || "⚪"}</div>
                 </div>
             </div>
@@ -151,10 +152,10 @@ cleaningGrid.addEventListener('click', async (event) => {
     if (!clickedSlot) return;
 
     const currentEmoji = clickedSlot.textContent.trim();
-    let index = familyEmojis.indexOf(currentEmoji);
+    let index = cleaningEmojis.indexOf(currentEmoji);
     if (index === -1) index = 0;
 
-    const nextEmoji = familyEmojis[(index + 1) % familyEmojis.length];
+    const nextEmoji = cleaningEmojis[(index + 1) % cleaningEmojis.length];
     clickedSlot.textContent = nextEmoji;
 
     const roomId = clickedSlot.dataset.id;
@@ -219,7 +220,7 @@ async function loadRestaurants() {
 
     data.forEach(row => {
         const restHTML = `
-        <div class="glass-card">
+        <div class="glass-card-infill">
                 <h3 class="glass-card-titles">${row.name}</h3>
                 <p>📍 ${row.zone}</p>
                 <p>$ ${row.price}</p> 
@@ -289,3 +290,72 @@ async function loadRecetas() {
 
 loadRestaurants();
 loadRecetas();
+
+// WISHLIST SECTION //
+document.getElementById('wish-add-btn').addEventListener('click', async () => {
+    const WishItemValue = document.getElementById('wish-item-input').value;
+    const WishLinkValue = document.getElementById('wish-link-input').value;
+    const WishUrgValue = document.getElementById('wish-urgency').value;
+    const WishPriceValue = document.getElementById('wish-price').value;
+    const WishPersValue = document.getElementById('wish-person').value;
+    const WishStatValue = document.getElementById('wish-status').value;
+
+    if (!WishItemValue) return alert("Please enter an item!");
+
+    const { error } = await db
+        .from('Wishlist')
+        .insert([
+            {
+                // Column Name : Variable Name
+                item: WishItemValue,
+                link: WishLinkValue,
+                urgency: WishUrgValue,
+                price: WishPriceValue,
+                person: WishPersValue,
+                status: WishStatValue
+            }
+        ]);
+        if (error) {
+        console.error("Error saving:", error);
+        alert("Could not save wish.");
+        }else{
+            console.log("Wish saved!");
+            document.getElementById('wish-item-input').value = '';
+            document.getElementById('wish-link-input').value = '';
+            document.getElementById('wish-urgency').value = '';
+            document.getElementById('wish-price').value = '';
+            document.getElementById('wish-person').value = '';
+            document.getElementById('wish-status').value = '';
+            loadWishlist();
+        }
+    });
+
+async function loadWishlist() {
+    const { data, error } = await db
+        .from('Wishlist')
+        .select('*')
+        .order('id');
+
+    if (error) {
+        console.error("Error loading wishlist:", error);
+        return;
+    }
+
+    const container = document.getElementById('wish-list');
+    container.innerHTML = '';
+
+    data.forEach(row => {
+        const wishHTML = `
+        <div class="glass-card-infill">
+                <h3 class="glass-card-titles">${row.item}</h3>
+                <p>📍 ${row.person}</p>
+                <p>$ ${row.price}</p> 
+                <p>Urg: ${row.urgency}</p>
+                <a href="${row.link}" target="_blank">Ver Mapa/Link</a>
+                <p>Status: ${row.status}</p>
+            </div>
+        `;
+        container.innerHTML += wishHTML;
+    });
+}
+loadWishlist();
