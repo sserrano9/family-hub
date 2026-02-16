@@ -132,10 +132,6 @@ async function loadCleaningSchedule() {
                     <div class="clean-slot" data-id="${row.id}" data-col="wed">${row.wed || "⚪"}</div>
                 </div>
                 <div class="flex-container-vertical">
-                    <span class="glass-card-titles">V</span>
-                    <div class="clean-slot" data-id="${row.id}" data-col="fri">${row.fri || "⚪"}</div>
-                </div>
-                <div class="flex-container-vertical">
                     <span class="glass-card-titles">D</span>
                     <div class="clean-slot" data-id="${row.id}" data-col="sun">${row.sun || "⚪"}</div>
                 </div>
@@ -220,16 +216,26 @@ async function loadRestaurants() {
 
     data.forEach(row => {
         const restHTML = `
-        <div class="glass-card-infill">
-                <h3 class="glass-card-titles">${row.name}</h3>
+        <div class="glass-card-infill collapsed">
+            <div class="glass-card-titles minimized" onclick="toggleRest(this)">
+                <h3 class="glass-card-titles-text">${row.name}</h3>
+                <button class="flechita">⏷</button>
+            </div>
+            <div class="rest-body">
                 <p>📍 ${row.zone}</p>
                 <p>$ ${row.price}</p> 
                 <p>Tipo: ${row.food_type}</p>
                 <a href="${row.link}" target="_blank">Ver Mapa/Link</a>
             </div>
+            </div>
         `;
         container.innerHTML += restHTML;
     });
+}
+
+function toggleRest(headerElement) {
+    const RestCard = headerElement.parentElement;
+    RestCard.classList.toggle('collapsed');
 }
 
 // RECIPES SECTION //
@@ -346,16 +352,53 @@ async function loadWishlist() {
 
     data.forEach(row => {
         const wishHTML = `
-        <div class="glass-card-infill">
-                <h3 class="glass-card-titles">${row.item}</h3>
+        <div class="glass-card-infill wish-boxes collapsed" data-person="${row.person}">
+            <div class="glass-card-titles minimized" onclick="toggleWish(this)">
+                <h3 class="glass-card-titles-text">${row.item}</h3>
+                <button class="flechita">⏷</button>
+            </div>
+            <div class="wish-body">
                 <p>📍 ${row.person}</p>
                 <p>$ ${row.price}</p> 
                 <p>Urg: ${row.urgency}</p>
                 <a href="${row.link}" target="_blank">Ver Mapa/Link</a>
                 <p>Status: ${row.status}</p>
+            </div>    
             </div>
         `;
         container.innerHTML += wishHTML;
     });
 }
 loadWishlist();
+
+//Filters//
+const filterButtons = document.querySelectorAll('.filter-buttons');
+filterButtons.forEach (filterButton => {
+    filterButton.addEventListener('click', () => {
+        const nameClicked = filterButton.innerText;
+        const wishBoxes = document.querySelectorAll(".wish-boxes");
+        if (filterButton.classList.contains('active-filter')){
+            filterButton.classList.remove('active-filter');
+            wishBoxes.forEach(wishBox => wishBox.style.display = 'block');
+        }else{
+            filterButtons.forEach(b=>b.classList.remove('active-filter'));
+            filterButton.classList.add('active-filter');
+            wishBoxes.forEach(wishBox=>{
+                const wishOwner = wishBox.getAttribute('data-person');
+                if (wishOwner === nameClicked){
+                    wishBox.style.display = 'block';
+                }else{
+                    wishBox.style.display = 'none';
+                }
+            });
+        }
+    });   
+});
+
+function toggleWish(headerElement) {
+    const card = headerElement.parentElement;
+    card.classList.toggle('collapsed');
+}
+
+
+

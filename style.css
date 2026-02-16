@@ -335,16 +335,22 @@ input, select {
 }
 
 .filter-buttons {
-    width:50px;
     background:var(--accent-primary); 
     color:white; 
     border:none; 
     border-radius:16px; 
     font-size:1em;
-    padding:6px 8px;
+    padding:6px 16px;
     box-sizing: border-box;
     cursor: pointer;
     text-align: center;
+    margin-bottom: 12px;
+}
+
+.active-filter {
+    background-color: #ffd700;
+    color: black;
+    border: 2px solid black;
 }
 
 .save-button {
@@ -354,6 +360,10 @@ input, select {
     border:none; 
     border-radius:16px; 
     padding:14px 16px;
+}
+
+.flex-center{
+    justify-content: space-around;
 }
 
 .entry-boxes {
@@ -419,4 +429,29 @@ body.editing .profile-emojis {
 
 .clean-slot:hover {
     background: #ddd;
+}
+
+.minimized {
+    margin:0;
+}
+
+.collapsed .wish-body {
+    display: none;
+}
+
+.collapsed .rest-body {
+    display: none;
+}
+
+.flechita{
+    transition: transform 0.3s;
+    font-size: 1.25em;
+    line-height:0.5;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+.collapsed .flechita {
+    transform: rotate(-90deg);
+    cursor: pointer;
 }
