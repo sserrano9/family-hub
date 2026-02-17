@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Inter:wght@400;500;600;700;800&display=swap');
 * {
 outline: 0px solid red;
 }
@@ -8,12 +7,13 @@ outline: 0px solid red;
         /* Palette: Modern Fintech */
         --bg-mesh-1: #e0c3fc;
         --bg-mesh-2: #8ec5fc;
+
         --glass-surface: rgba(255, 255, 255, 0.35);
         --glass-border: rgba(255, 255, 255, 0.6);
         --text-primary: #1e293b;
         --text-secondary: #64748b;
         
-        --accent-primary: #6366f1; /* Indigo */
+        --accent-primary: #6366f1;
         --accent-glow: rgba(99, 102, 241, 0.4);
         
         --danger-surface: #fee2e2;
@@ -23,37 +23,41 @@ outline: 0px solid red;
         --warning-surface: #fef9c3;
         --warning-text: #854d0e;
 
-        /* Stack Colors */
         --stack-stream: #f87171;
         --stack-util: #60a5fa;
         --stack-gym: #fbbf24;
         --stack-other: #94a3b8;
+
 }
 
 body {
-        font-family: 'Inter', sans-serif;
+    /* Original Purple Techy Colors  */
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
         background: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-                    radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                    radial-gradient(at -100% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
                     radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
-        background-color: #f3f4f6; /* Fallback */
-        background-image: radial-gradient(at 40% 20%, var(--bg-mesh-1) 0px, transparent 50%),
-                          radial-gradient(at 80% 0%, var(--bg-mesh-2) 0px, transparent 50%),
-                          radial-gradient(at 0% 50%, #eff6ff 0px, transparent 50%);
+        background-color: #f3f4f6;
+        background-image: radial-gradient(at 40% 20%, var(--bg-mesh-1) 0px, transparent 40%),
+                          radial-gradient(at 80% 0%, var(--bg-mesh-2) 0px, transparent 40%),
+                          radial-gradient(at 0% 50%, #eff6ff 0px, transparent 40%);
         background-size: 150% 150%;
-        animation: meshMove 20s ease infinite;
+        animation: meshMove 15s ease infinite;
         min-height: 100vh;
         margin: 0;
         padding: 0;
-        padding-bottom: 110px; /* Space for nav */
+        padding-bottom: 110px;
         color: var(--text-primary);
         -webkit-font-smoothing: antialiased;
-}
+
+    }
 
 @keyframes meshMove {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
 }
+
 
 .container {
     max-width: 480px;
@@ -76,20 +80,24 @@ body {
 }
 
 .cat-mercado {
-        display: flex; 
-        flex-direction: column;
+        min-width: 50%;
         align-items: center;
-        background: white; padding: 20% 15%; border-radius: 20px; 
-        text-align: center; cursor: pointer;
+        background: white; 
+        padding: 20% 15%; 
+        border-radius: 20px; 
+        text-align: center; 
+        cursor: pointer;
         border: 1px solid rgba(0,0,0,0.04);
         box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); 
-        position: relative; transition: all 0.2s ease;
+        position: relative; 
+        transition: all 0.2s ease;
+        overflow: hidden;
 }
 
 .cat-titles,
 .cat-price {
-        margin: 0;
-        margin-bottom: 10px;
+    margin: 0;
+    margin-bottom: 10px;
 }
 
 input, select {
@@ -113,20 +121,21 @@ input, select {
 
 #TituloPrincipal,
 #SubtituloPrincipal {
-    font-family: 'Inter', sans-serif;
+    font-family: "Bagel Fat One", system-ui;
+    font-style: normal;
     color: var(--danger-text);
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #TituloPrincipal {
-    font-weight: 800;
+    font-weight: 400;
     font-size: 40px;
-    text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.4), 1px -1px 0 rgba(255, 255, 255, 0.4), -1px 1px 0 rgba(255, 255, 255, 0.4), 1px 1px 0 rgba(255, 255, 255, 0.4);
+    margin-top: 0;
 }
 
 #SubtituloPrincipal {
-    font-weight: 500;
+    font-weight: 200;
     font-size: 18px;
     margin-top: -25px;
 }
@@ -162,8 +171,31 @@ input, select {
 }
 
 .glass-card-titles-text {
+    font-family: 'Bagel Fat One', sans-serif;
+    font-weight: 400;
     font-size: 1.5em;
     margin:0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.secondary-glass-card-titles-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1.25em;
+    margin:0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.tertiary-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: .75em;
+    margin:0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.visual-division{
+    margin-bottom: 10px;
 }
 
 .input-box {
@@ -183,7 +215,6 @@ input, select {
     display:flex;
     flex-flow: row wrap;
     min-height:3rem;
-    margin: 0;
     align-items:center; 
     padding:0px;
     gap:8px;
@@ -295,6 +326,7 @@ input, select {
 }
 
 .profile-emojis {
+    font-weight: 300;
     flex:1;
     margin:0;
     border: 0;
@@ -340,7 +372,7 @@ input, select {
     border:none; 
     border-radius:16px; 
     font-size:1em;
-    padding:6px 16px;
+    padding:6px 10px;
     box-sizing: border-box;
     cursor: pointer;
     text-align: center;
@@ -415,6 +447,7 @@ body.editing .profile-emojis {
 
 /* The Individual Buttons */
 .clean-slot {
+    font-weight: 300;
     width: 50px;
     height: 50px;
     font-size: 1.5rem;

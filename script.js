@@ -91,6 +91,68 @@ function switchTab(tabName) {
 
 loadSchedule();
 
+// Grocery Categories Section //
+async function loadGroceries() {
+    const { data, error} = await db
+    .from('Groceries')
+        .select('*')
+        .order('product', { ascending: true });
+    if (error){
+        console.error("Error loading groceries:", error);
+        return;
+    }
+    const groceryContainer = document.getElementById('grocery-list-container');
+    groceryContainer.innerHTML = "";
+    data.forEach(row=>{
+        const costLabel = row.frequency === 'Weekly' ? '/week' : '/month';
+        const GroceryHtml = `
+            <div class="glass-card-infill grocery-item-card" data-category="${row.category}">
+                
+                <div class="card-header glass-card-titles">
+                    <div class="secondary-glass-card-titles-text">${row.product}</div>
+                    <div class="qty-badge">${row.qty} ${row.unit}</div>
+                </div>
+                <div class="card-body">
+                    <p><strong>Frequency:</strong> ${row.frequency}</p>
+                    <p><strong>Cost:</strong> $${row.cost} ${costLabel}</p>
+                    <p><strong>Expires:</strong> ${row.expy} days</p>
+                    
+                    <div class="status-indicator">Status: ${row.status || 'Available'}</div>
+                </div>
+
+            </div>
+        `;
+        groceryContainer.innerHTML += GroceryHtml;
+    });
+}
+
+
+function CatSwitchTab(categoryName) {
+    currentView = categoryName;
+    const groceryItems = document.querySelectorAll('.grocery-item-card');
+    groceryItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category').trim();
+        document.getElementById('groceries-summary').style.display = 'none';
+        document.getElementById('groceries-input').style.display = 'none';
+        document.getElementById('groceries-grid').style.display = 'none';
+        document.getElementById('selected-category').style.display = 'block';
+        if (itemCategory === categoryName){
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+loadGroceries();
+function goBack() {
+    document.getElementById('groceries-summary').style.display = 'block';
+    document.getElementById('groceries-input').style.display = 'block';
+    document.getElementById('groceries-grid').style.display = 'flex';
+    document.getElementById('selected-category').style.display = 'none';
+}
+    
+
+
 // CLEANING SCHEDULE SECTION //
 editLimpieza.addEventListener("click", () => {
     isEditingLimpieza = !isEditingLimpieza;
@@ -218,7 +280,7 @@ async function loadRestaurants() {
         const restHTML = `
         <div class="glass-card-infill collapsed">
             <div class="glass-card-titles minimized" onclick="toggleRest(this)">
-                <h3 class="glass-card-titles-text">${row.name}</h3>
+                <h3 class="secondary-glass-card-titles-text">${row.name}</h3>
                 <button class="flechita">⏷</button>
             </div>
             <div class="rest-body">
@@ -285,7 +347,7 @@ async function loadRecetas() {
     data.forEach(row => {
         const recetasHTML = `
         <div class="glass-card">
-                <h3 class="glass-card-titles">${row.name}</h3>
+                <h3 class="glass-card-titles-text">${row.name}</h3>
                 <p>Tipo: ${row.rec_type}</p>
                 <a href="${row.link}" target="_blank">Ver Mapa/Link</a>
             </div>
@@ -354,7 +416,7 @@ async function loadWishlist() {
         const wishHTML = `
         <div class="glass-card-infill wish-boxes collapsed" data-person="${row.person}">
             <div class="glass-card-titles minimized" onclick="toggleWish(this)">
-                <h3 class="glass-card-titles-text">${row.item}</h3>
+                <h3 class="secondary-glass-card-titles-text">${row.item}</h3>
                 <button class="flechita">⏷</button>
             </div>
             <div class="wish-body">
@@ -399,6 +461,5 @@ function toggleWish(headerElement) {
     const card = headerElement.parentElement;
     card.classList.toggle('collapsed');
 }
-
 
 
