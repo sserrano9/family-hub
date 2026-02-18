@@ -33,13 +33,16 @@
 
     <!-- HOME TAB AND CONTENT -->
     <div id="home" class="tab-content" style="display: block">
-        <img href="" width="">
-        <div class="glass-card-titles-text" style="text-align: center;">
-            Venid a mí, todos los que estáis cansados y cargados, 
-            y yo os haré descansar. Tomad mi yugo sobre vosotros y aprended de mí, 
-            que soy manso y humilde de corazón, 
-            y hallareis descanso para vustras almas. 
-            Porque mi yugo es fácil y mi carga ligera.
+        <div class="glass-card">
+            <div class="glass-card-titles-text" style="text-align: center;">Mateo 11:28-30</div>
+            <br>
+            <div class="secondary-glass-card-titles-text" style="text-align: center;">
+                Venid a mí, todos los que estáis cansados y cargados, 
+                y yo os haré descansar. Tomad mi yugo sobre vosotros y aprended de mí, 
+                que soy manso y humilde de corazón, 
+                y hallareis descanso para vustras almas. 
+                Porque mi yugo es fácil y mi carga ligera.
+            </div>
         </div>
     </div>
 
@@ -55,16 +58,8 @@
                     <h4 class="secondary-glass-card-titles-text">Total Gastos</h4>
                     <p id="budgetDisplay">$0 / $4500</p>
                 </div>
-                <div class="progress-track">
+                    <div class="progress-track">
                     <div class="progress-fill budget-fill" id="budgetProgressBar"></div>
-                </div>
-
-                <div class="progress-label">
-                    <h4 class="secondary-glass-card-titles-text">Savings Goal</h4>
-                    <p class="tertiary-text" id="goalDisplay">$0 saved</p>
-                </div>
-                <div class="progress-track">
-                    <div class="progress-fill savings-fill" id="savingsProgressBar"></div>
                 </div>
         </div>
         <div id="groceries-input" class="glass-card">
@@ -79,77 +74,95 @@
             </div>
         </div>
 
-         <div id="groceries-grid" class="grid">
-            <div class="cat-mercado" onclick="CatSwitchTab('prot')">
-                <div class="icon-box">
-                    <p class="icon">🥩</p>
+         <div id="groceries-grid" class="glass-card-infill">
+            <div id="cat-header">
+                <div class="glass-card-infill">
+                    <div>
+                    <div class="glass-card-titles-text">Mercado:</div>
+                    <br>
+                        <div class="glass-card-titles">
+                            <div class="secondary-glass-card-titles-text">Mensual:</div>
+                            <div class="secondary-glass-card-titles-text" id="global-monthly-total">$0.00</div>
+                        </div>
+                         <div class="glass-card-titles">
+                            <div class="secondary-glass-card-titles-text">Semanal:</div>  
+                            <div class="secondary-glass-card-titles-text" id="global-weekly-total">$0.00</div>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="secondary-glass-card-titles-text">Proteinas</h3>
-                <p class="cat-price">$0</p>
             </div>
-
-            <div class="cat-mercado" onclick="CatSwitchTab('carbs')">
-                 <div class="icon-box">
-                    <p class="icon">🥑</p>
+            <div id="cat-body" class="grid">
+                <div id="prot-total" class="cat-mercado" onclick="CatSwitchTab('prot')">
+                    <div class="icon-box">
+                        <p class="icon">🥩</p>
+                    </div>
+                    <h3 class="secondary-glass-card-titles-text">Proteinas</h3><br>
+                    <p class="cat-price">$0</p>
                 </div>
-                <h3 class="secondary-glass-card-titles-text">Vegs y Carbos</h3>
-                <p class="cat-price">$0</p>
-            </div>
 
-            <div class="cat-mercado" onclick="CatSwitchTab('drinks')">
-                <div class="icon-box">
-                    <p class="icon">🍺</p>
+                <div id="carbs-total" class="cat-mercado" onclick="CatSwitchTab('carbs')">
+                    <div class="icon-box">
+                        <p class="icon">🥑</p>
+                    </div>
+                    <h3 class="secondary-glass-card-titles-text">Vegs y Carbos</h3><br>
+                    <p class="cat-price">$0</p>
                 </div>
-                <h3 class="secondary-glass-card-titles-text>Bebidas</h3>
-                <p class="cat-price">$0</p>
-            </div>
 
-            <div class="cat-mercado" onclick="CatSwitchTab('aseo')">
-                <div class="icon-box">
-                    <p class="icon">🧼</p>
+                <div id="drinks-total" class="cat-mercado" onclick="CatSwitchTab('drinks')">
+                    <div class="icon-box">
+                        <p class="icon">🍺</p>
+                    </div>
+                    <h3 class="secondary-glass-card-titles-text">Bebidas</h3><br>
+                    <p class="cat-price">$0</p>
                 </div>
-                <h3 class="secondary-glass-card-titles-text">Aseo</h3>
-                <p class="cat-price">$0</p>
-            </div>
 
-            <div class="cat-mercado" onclick="CatSwitchTab('conds')">
-                <div class="icon-box">
-                    <p class="icon">🍯</p>
+                <div id="aseo-total" class="cat-mercado" onclick="CatSwitchTab('aseo')">
+                    <div class="icon-box">
+                        <p class="icon">🧼</p>
+                    </div>
+                    <h3 class="secondary-glass-card-titles-text">Aseo</h3><br>
+                    <p class="cat-price">$0</p>
                 </div>
-                <div class="secondary-glass-card-titles-text">Aderezos</div>
-                <p class="cat-price">$0</p>
-            </div>
 
-            <div class="cat-mercado" onclick="CatSwitchTab('nuts')">
-                <div class="icon-box">
-                    <p class="icon">🍎</p>
+                <div id="conds-total" class="cat-mercado" onclick="CatSwitchTab('conds')">
+                    <div class="icon-box">
+                        <p class="icon">🍯</p>
+                    </div>
+                    <div class="secondary-glass-card-titles-text">Aderezos</div><br>
+                    <p class="cat-price">$0</p>
                 </div>
-                <h3 class="secondary-glass-card-titles-text">Frutas, Nueces y Granos</h3>
-                <p class="cat-price">$0</p>
-            </div>
 
-            <div class="cat-mercado" onclick="CatSwitchTab('lacteos')">
-                <div class="icon-box">
-                    <p class="icon">🧀</p>
+                <div id="nuts-total" class="cat-mercado" onclick="CatSwitchTab('nuts')">
+                    <div class="icon-box">
+                        <p class="icon">🍎</p>
+                    </div>
+                    <h3 class="secondary-glass-card-titles-text">Frutas, Nueces y Granos</h3><br>
+                    <p class="cat-price">$0</p>
                 </div>
-                <h3 class="secondary-glass-card-titles-text">Lacteos</h3>
-                <p class="cat-price">$0</p>
-            </div>
 
-            <div class="cat-mercado" onclick="CatSwitchTab('teo')">
-                <div class="icon-box">
-                    <p class="icon">🐑</p>
+                <div id="lacteos-total" class="cat-mercado" onclick="CatSwitchTab('lacteos')">
+                    <div class="icon-box">
+                        <p class="icon">🧀</p>
+                    </div>
+                    <h3 class="secondary-glass-card-titles-text">Lacteos</h3><br>
+                    <p class="cat-price">$0</p>
                 </div>
-                <h3 class="secondary-glass-card-titles-text">Teo</h3>
-                <p class="cat-price">$0</p>
-            </div>
 
-            <div class="cat-mercado">
-                <div class="icon-box">
-                    <p class="icon">➕</p>
+                <div id="teo-total" class="cat-mercado" onclick="CatSwitchTab('teo')">
+                    <div class="icon-box">
+                        <p class="icon">🐑</p>
+                    </div>
+                    <h3 class="secondary-glass-card-titles-text">Teo</h3><br>
+                    <p class="cat-price">$0</p>
                 </div>
-                <h3 class="secondary-glass-card-titles-text">otros</h3>
-                <p class="cat-price">$0</p>
+
+                <div id="otros-total" class="cat-mercado">
+                    <div class="icon-box">
+                        <p class="icon">➕</p>
+                    </div>
+                    <h3 class="secondary-glass-card-titles-text">Otros</h3><br>
+                    <p class="cat-price">$0</p>
+                </div>
             </div>
         </div>
 

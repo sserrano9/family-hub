@@ -65,25 +65,23 @@ body {
     padding: 16px;
 }
 
+#no-margin{
+    margin:0 0;
+}
+
 .grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
         gap: 16px;
-        background: var(--glass-surface);
-        border: 1px solid var(--glass-border);
         border-radius: 16px;
-        padding: 16px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
 }
 
 .cat-mercado {
         min-width: 50%;
         align-items: center;
         background: white; 
-        padding: 20% 15%; 
+        padding: 15% 20% 10%; 
         border-radius: 20px; 
         text-align: center; 
         cursor: pointer;
@@ -181,7 +179,7 @@ input, select {
 .secondary-glass-card-titles-text {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 1.25em;
+    font-size: 1em;
     margin:0;
     -webkit-font-smoothing: antialiased;
 }
@@ -280,7 +278,6 @@ input, select {
         content: ''; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
         background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
         transform: translateX(-100%);
-        animation: shimmer 2s infinite;
     }
     @keyframes shimmer { 100% { transform: translateX(100%); } }
 
@@ -473,6 +470,10 @@ body.editing .profile-emojis {
 }
 
 .collapsed .rest-body {
+    display: none;
+}
+
+.collapsed .prod-body {
     display: none;
 }
 

@@ -103,29 +103,95 @@ async function loadGroceries() {
     }
     const groceryContainer = document.getElementById('grocery-list-container');
     groceryContainer.innerHTML = "";
+    let grandTotal = { weekly: 0, monthly: 0 };
+    let catTotals = {};
     data.forEach(row=>{
-        const costLabel = row.frequency === 'Weekly' ? '/week' : '/month';
+        const qty = parseFloat(row.qty) || 0;
+        const cost = parseFloat(row.cost) || 0;
+        const baseCost = cost * qty;
+
+        let itemWeekly = 0;
+        let itemMonthly = 0;
+
+        if (row.frequency === 'semanal') {
+            itemWeekly = baseCost;
+            itemMonthly = baseCost * 4.3;
+        } else {
+            itemMonthly = baseCost;
+            itemWeekly = baseCost / 4.3;
+        }
+        grandTotal.weekly += itemWeekly;
+        grandTotal.monthly += itemMonthly;
+
+        if (!catTotals[row.category]) {
+            catTotals[row.category] = { weekly: 0, monthly: 0 };
+        }
+
+        catTotals[row.category].weekly += itemWeekly;
+        catTotals[row.category].monthly += itemMonthly;
+
         const GroceryHtml = `
-            <div class="glass-card-infill grocery-item-card" data-category="${row.category}">
-                
-                <div class="card-header glass-card-titles">
+            <div class="glass-card-infill grocery-item-card collapsed" data-category="${row.category}">
+                <div class="card-header glass-card-titles minimized" onclick="toggleProd(this)">
                     <div class="secondary-glass-card-titles-text">${row.product}</div>
                     <div class="qty-badge">${row.qty} ${row.unit}</div>
                 </div>
-                <div class="card-body">
-                    <p><strong>Frequency:</strong> ${row.frequency}</p>
-                    <p><strong>Cost:</strong> $${row.cost} ${costLabel}</p>
+                <div class="prod-body">
+                    <p><strong>Cost:</strong> $${baseCost.toFixed(2)} / ${row.frequency === 'semanal' ? 'wk' : 'mo'}</p>
                     <p><strong>Expires:</strong> ${row.expy} days</p>
-                    
                     <div class="status-indicator">Status: ${row.status || 'Available'}</div>
                 </div>
-
             </div>
         `;
         groceryContainer.innerHTML += GroceryHtml;
     });
+
+    const globalWk = document.getElementById('global-weekly-total');
+    const globalMo = document.getElementById('global-monthly-total');
+    if (globalWk) globalWk.innerText = `$${grandTotal.weekly.toFixed(2)}`;
+    if (globalMo) globalMo.innerText = `$${grandTotal.monthly.toFixed(2)}`;
+    for (const [catName, totals] of Object.entries(catTotals)) {
+        const btnId = `${catName}-total`;
+        const btnElement = document.getElementById(btnId); 
+        if (btnElement) {
+            const priceTag = btnElement.querySelector('.cat-price');
+            if (priceTag) {
+                priceTag.innerHTML = `
+                <strong>$${totals.monthly.toFixed(0)}/mo</strong>
+                <br><span style="font-size: 0.8em; opacity: 0.8;">$${totals.weekly.toFixed(0)}/wk</span>
+                `;
+        }
+    }
+}
+const budgetLimit = 2500;
+const otherExpenses = 0;
+const finalTotal = grandTotal.monthly + otherExpenses;
+const usagePercentage = (finalTotal/budgetLimit)*100;
+const budgetDisplay = document.getElementById('budgetDisplay');
+const budgetBar = document.getElementById('budgetProgressBar');
+
+if (budgetDisplay) {
+    budgetDisplay.innerText = `$${finalTotal.toFixed(0)} / $${budgetLimit}`;
+    }
+if (budgetBar) {
+    budgetBar.style.width = `${Math.min(usagePercentage, 100)}%`;
+if (usagePercentage > 100) {
+            budgetBar.style.backgroundColor = '#ff4d4d'; // Red (Danger)
+            budgetBar.style.boxShadow = '0 0 10px #ff4d4d'; // Optional Glow
+        } else if (usagePercentage > 85) {
+            budgetBar.style.backgroundColor = '#ffae00'; // Orange (Warning)
+            budgetBar.style.boxShadow = 'none';
+        } else {
+            budgetBar.style.backgroundColor = 'var(--main-accent, #4caf50)'; // Green (Safe)
+            budgetBar.style.boxShadow = 'none';
+        }
+}
 }
 
+function toggleProd(headerElement) {
+    const ProdCard = headerElement.parentElement;
+    ProdCard.classList.toggle('collapsed');
+}
 
 function CatSwitchTab(categoryName) {
     currentView = categoryName;
@@ -147,7 +213,7 @@ loadGroceries();
 function goBack() {
     document.getElementById('groceries-summary').style.display = 'block';
     document.getElementById('groceries-input').style.display = 'block';
-    document.getElementById('groceries-grid').style.display = 'flex';
+    document.getElementById('groceries-grid').style.display = 'grid';
     document.getElementById('selected-category').style.display = 'none';
 }
     
@@ -281,7 +347,7 @@ async function loadRestaurants() {
         <div class="glass-card-infill collapsed">
             <div class="glass-card-titles minimized" onclick="toggleRest(this)">
                 <h3 class="secondary-glass-card-titles-text">${row.name}</h3>
-                <button class="flechita">⏷</button>
+                <button class="flechita">➕</button>
             </div>
             <div class="rest-body">
                 <p>📍 ${row.zone}</p>
@@ -417,7 +483,7 @@ async function loadWishlist() {
         <div class="glass-card-infill wish-boxes collapsed" data-person="${row.person}">
             <div class="glass-card-titles minimized" onclick="toggleWish(this)">
                 <h3 class="secondary-glass-card-titles-text">${row.item}</h3>
-                <button class="flechita">⏷</button>
+                <button class="flechita">➕</button>
             </div>
             <div class="wish-body">
                 <p>📍 ${row.person}</p>
