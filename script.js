@@ -92,6 +92,60 @@ function switchTab(tabName) {
 loadSchedule();
 
 // Grocery Categories Section //
+
+let selectedFqy = 'one-time'; 
+const freqButtons = document.querySelectorAll('.pantry-freq');
+freqButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        selectedFqy = btn.dataset.value;
+        freqButtons.forEach(b => b.classList.remove('active-filter'));
+        btn.classList.add('active-filter');
+    });
+});
+
+document.getElementById('pantry-add-btn').addEventListener('click', async () => {
+    const pantryProduct = document.getElementById('pantry-product').value;
+    const pantryCat = document.getElementById('pantry-cat').value;
+    const pantryQty = document.getElementById('pantry-qty').value;
+    const pantryUnit = document.getElementById('pantry-unit').value;
+    // const pantryExpy = document.getElementById('pantry-expy').value;
+    const pantryCost = document.getElementById('pantry-cost').value;
+    // const pantryStatus = document.getElementById('pantry-status').value;
+
+    if (!pantryProduct) return alert("Please enter a product!");
+
+    const { error } = await db
+        .from('Groceries')
+        .insert([
+            {
+                product: pantryProduct.trim(),
+                category: pantryCat,
+                qty: parseFloat(pantryQty) || 0,
+                unit: pantryUnit,
+                frequency: selectedFqy,
+                // expy: parseInt(pantryExpy) || 0,
+                cost: parseFloat(pantryCost) || 0,
+                // status: pantryStatus,
+            }
+        ]);
+        if (error) {
+        console.error("Error saving:", error);
+        alert("Could not save product.");
+        }else{
+            console.log("Product saved!");
+            document.getElementById('pantry-product').value = '';
+            document.getElementById('pantry-cat').value = '';
+            document.getElementById('pantry-qty').value = '';
+            document.getElementById('pantry-unit').value = '';
+            // document.getElementById('pantry-expy').value = '';
+            document.getElementById('pantry-cost').value = '';
+            // document.getElementById('pantry-status').value = '';
+            loadGroceries();
+        }
+        selectedFqy = 'one-time';
+        freqButtons.forEach(b => b.classList.remove('active-filter'));
+    });
+
 async function loadGroceries() {
     const { data, error} = await db
     .from('Groceries')

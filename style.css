@@ -363,6 +363,17 @@ input, select {
     cursor: pointer;
 }
 
+.pantry-button {
+    flex: 1 1 30%;
+    min-height: 40px;
+    background:var(--glass-surface);  
+    backdrop-filter: blur(10px);
+    border:none; 
+    border-radius:16px; 
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
 .filter-buttons {
     background:var(--accent-primary); 
     color:white; 

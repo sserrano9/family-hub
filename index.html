@@ -63,14 +63,32 @@
                 </div>
         </div>
         <div id="groceries-input" class="glass-card">
-            <div class="list-section">
-                <h3>Missing Pantry Items</h3>
-                <div class="input-group glass">
-                    <input type="text" id="pantry-input" placeholder="e.g. Milk, Eggs...">
-                    <button id="pantry-add-btn" class="add-button">+</button>
-                </div>
-                <ul id="pantry-list" class="styled-list">
-                </ul>
+            <div class="glass-card-titles">
+                <h3 class="glass-card-titles-text">Lista de Mercado:</h3>
+                <button id="pantry-add-btn" class="add-button">+</button>
+            </div>
+            <div class="flex-container">
+                <input type="text" id="pantry-product" placeholder="Leche, huevos, harina...">
+                <button id="pantry-one-btn" class="pantry-button pantry-freq" data-value="one-time">1x</button>
+                <button id="pantry-wk-btn" class="pantry-button pantry-freq" data-value="semanal">Sem</button>
+                <button id="pantry-mo-btn" class="pantry-button pantry-freq" data-value="mensual">Mes</button>
+                <input class="dropdowns pantry-button" type="text" id="pantry-qty" placeholder="Cantidad">
+                <select id="pantry-unit" class="dropdowns pantry-button">
+                    <option value="kg">kg</option>
+                    <option value="un">unidad</option>
+                </select>
+                <input class="dropdowns pantry-button" type="text" id="pantry-cost" placeholder="$2.5">
+                <select id="pantry-cat" class="dropdowns pantry-button">
+                    <option value="prot">Proteina</option>
+                    <option value="carbs">Vegetal/Carb</option>
+                    <option value="drinks">Bebida</option>
+                    <option value="aseo">Aseo</option>
+                    <option value="conds">Aderezo</option>
+                    <option value="nuts">Fruta, nuez, semilla</option>
+                    <option value="lacteos">Lacteo</option>
+                    <option value="teo">Teo</option>
+                    <option value="otros">Otro</option>
+                </select>
             </div>
         </div>
 
@@ -350,7 +368,6 @@
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
-                            
                         </select>
                         <select class="dropdowns" name="person" id="wish-person">
                             <option value="">Familia</option>
