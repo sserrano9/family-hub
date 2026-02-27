@@ -14,6 +14,8 @@ const emojiBoxes = document.querySelectorAll(".profile-emojis");
 const editLimpieza = document.getElementById("edit-limpieza");
 const cleaningGrid = document.getElementById("cleaning-grid");
 
+let isShoppingMode = false;
+
 // LOGIC //
 function updateSlotInHTML(dayName, slotName, emojiValue) {
     const selector = `.profile-emojis[data-day="${dayName}"][data-slot="${slotName}"]`;
@@ -103,49 +105,6 @@ freqButtons.forEach(btn => {
     });
 });
 
-document.getElementById('pantry-add-btn').addEventListener('click', async () => {
-    const pantryProduct = document.getElementById('pantry-product').value;
-    const pantryCat = document.getElementById('pantry-cat').value;
-    const pantryQty = document.getElementById('pantry-qty').value;
-    const pantryUnit = document.getElementById('pantry-unit').value;
-    // const pantryExpy = document.getElementById('pantry-expy').value;
-    const pantryCost = document.getElementById('pantry-cost').value;
-    // const pantryStatus = document.getElementById('pantry-status').value;
-
-    if (!pantryProduct) return alert("Please enter a product!");
-
-    const { error } = await db
-        .from('Groceries')
-        .insert([
-            {
-                product: pantryProduct.trim(),
-                category: pantryCat,
-                qty: parseFloat(pantryQty) || 0,
-                unit: pantryUnit,
-                frequency: selectedFqy,
-                // expy: parseInt(pantryExpy) || 0,
-                cost: parseFloat(pantryCost) || 0,
-                // status: pantryStatus,
-            }
-        ]);
-        if (error) {
-        console.error("Error saving:", error);
-        alert("Could not save product.");
-        }else{
-            console.log("Product saved!");
-            document.getElementById('pantry-product').value = '';
-            document.getElementById('pantry-cat').value = '';
-            document.getElementById('pantry-qty').value = '';
-            document.getElementById('pantry-unit').value = '';
-            // document.getElementById('pantry-expy').value = '';
-            document.getElementById('pantry-cost').value = '';
-            // document.getElementById('pantry-status').value = '';
-            loadGroceries();
-        }
-        selectedFqy = 'one-time';
-        freqButtons.forEach(b => b.classList.remove('active-filter'));
-    });
-
 async function loadGroceries() {
     const { data, error} = await db
     .from('Groceries')
@@ -185,7 +144,7 @@ async function loadGroceries() {
         catTotals[row.category].monthly += itemMonthly;
 
         const GroceryHtml = `
-            <div class="glass-card-infill grocery-item-card collapsed" data-category="${row.category}">
+            <div class="glass-card-infill grocery-item-card collapsed" data-category="${row.category}" data-status="pending">
                 <div class="card-header glass-card-titles minimized" onclick="toggleProd(this)">
                     <div class="secondary-glass-card-titles-text">${row.product}</div>
                     <div class="qty-badge">${row.qty} ${row.unit}</div>
@@ -242,8 +201,34 @@ if (usagePercentage > 100) {
 }
 }
 
+document.getElementById('shopping-toggle-btn').addEventListener('click', () => {
+    isShoppingMode = !isShoppingMode;
+    const toggleBtn = document.getElementById('shopping-toggle-btn');
+    if (isShoppingMode) {
+        toggleBtn.innerText = "Exit Shopping Mode";
+        document.body.classList.add('shopping-theme');
+        toggleBtn.style.backgroundColor = "#ff9800";
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.classList.add('collapsed'); 
+        });
+    } else {
+        toggleBtn.innerText = "Enter Shopping Mode";
+        toggleBtn.style.backgroundColor = "";
+        document.body.classList.remove('shopping-theme');
+        }
+});
+
 function toggleProd(headerElement) {
     const ProdCard = headerElement.parentElement;
+    if (isShoppingMode) {
+        ProdCard.classList.toggle('bought');
+        if (ProdCard.classList.contains('bought')) {
+            ProdCard.dataset.status = 'bought';
+        } else {
+            ProdCard.dataset.status = 'pending'; 
+            }
+    return; 
+    }
     ProdCard.classList.toggle('collapsed');
 }
 

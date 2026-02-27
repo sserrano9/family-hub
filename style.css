@@ -30,6 +30,25 @@ outline: 0px solid red;
 
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white; /* Your shopping mode color */
+    opacity: 0; /* Invisible by default */
+    transition: opacity 0.5s ease-in-out; /* Smooth fade */
+    z-index: -1; /* Keeps it strictly in the background */
+    pointer-events: none; /* Lets clicks pass through to your cards */
+}
+
+body.shopping-theme::before {
+    opacity: 1; 
+}
+
+
 body {
     /* Original Purple Techy Colors  */
     font-family: 'Inter', sans-serif;
@@ -500,3 +519,15 @@ body.editing .profile-emojis {
     transform: rotate(-90deg);
     cursor: pointer;
 }
+
+/* When an item is checked off in shopping mode */
+.grocery-item-card.bought {
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+}
+
+/* Optional: Add a strikethrough to the product name */
+.grocery-item-card.bought .secondary-glass-card-titles-text { 
+    text-decoration: line-through; 
+}
+
