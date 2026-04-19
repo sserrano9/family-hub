@@ -3,7 +3,7 @@ const SUPABASE_URL = 'https://ynlrzypirbdswfngnwvt.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlubHJ6eXBpcmJkc3dmbmdud3Z0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5MjM0NzgsImV4cCI6MjA4NjQ5OTQ3OH0.QjZieMxaHbz1sIH-VeoQbz-v8AuZmcusRVQ2G1HC9h0';
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const familyEmojis = ["👩👔", "🎤︎︎", "📐", "🍴"];
+const familyEmojis = ["👩", "👔", "🎤︎︎", "📐", "🍴"];
 const cleaningEmojis = ["👩", "👔", "🎤︎︎", "📐"];
     let isEditing = false;
     let isEditingLimpieza = false;
